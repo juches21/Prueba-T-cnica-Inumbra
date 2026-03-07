@@ -17,20 +17,27 @@ public class EnemyMotion : MonoBehaviour
 
     private Animator Animator;
 
+
+    Rigidbody rb;
+
+
     bool Chequer;
-    bool ChequerWalck;
-    bool ChequerStop;
+    bool Spinning;
+    bool Stunned;
 
 
     GameObject Player;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        rb = GetComponent<Rigidbody>();
         Player = GameObject.FindGameObjectWithTag("Player");
         Animator = GetComponent<Animator>();
         m_Agent = GetComponent<NavMeshAgent>();
         //NextWaypoint();
-        AtackMode();
+        //AtackMode();
+        //GetStunned();
+        StartWalck();
     }
 
     // Update is called once per frame
@@ -52,36 +59,22 @@ public class EnemyMotion : MonoBehaviour
         }
         else
         {
-
-            if (Vector3.Distance(transform.position, Player.transform.position) >= 2)
-            {
-                // Mover hacia el jugador
-                ChequerStop=true;
-                m_Agent.isStopped = false;
-                m_Agent.SetDestination(Player.transform.position);
-                if (ChequerWalck)
-                {
-                    ChequerWalck=false;
-                Animator.SetTrigger("Walk");
-                }
-            }
-            else
-            {
-                ChequerWalck = true;
-
-                // Detenerse antes de llegar
-                m_Agent.isStopped = true;
-                if (ChequerStop)
-                {
-                    ChequerStop=false;
-                Animator.SetTrigger("Stop");
-
-                }
-            }
-
+           
         }
     }
 
+
+    public void StartWalck()
+    {
+        print("restart");
+        m_Agent.isStopped = false;
+
+        IsPatrol = true;
+        Chequer = true;
+        Animator.SetBool("Attack", false);
+
+        NextWaypoint();
+    }
     void NextWaypoint()
     {
         
@@ -116,14 +109,148 @@ public class EnemyMotion : MonoBehaviour
     }
 
 
-    void AtackMode()
+
+
+
+
+
+
+
+
+
+
+
+    public void AtackMode()
     {
    
         Animator.SetBool("Attack", true);
         StopAllCoroutines();
         IsPatrol = false;
+        StartCoroutine(Chase());
+    }
+
+
+
+
+
+    IEnumerator Chase()
+    {
+        while (true)
+        {
+            if (Vector3.Distance(transform.position, Player.transform.position) >= 2f)
+            {
+                // Mover hacia el jugador
+                m_Agent.isStopped = false;
+                m_Agent.SetDestination(Player.transform.position);
+
+         
+
+            }
+            else
+            {
+
+                // Detenerse antes de llegar
+                m_Agent.isStopped = true;
+
+                StartAttack();
+            }
+
+
+            if (m_Agent.velocity.magnitude > 0.1f)
+            {
+                Animator.SetBool("WalkAttack", true);
+
+                Debug.Log("El agente se está moviendo");
+            }
+            else
+            {
+                Animator.SetBool("WalkAttack", false);
+
+                
+            }
+            yield return null; // esperar al siguiente frame
+        }
 
     }
+
+
+
+    void StartAttack()
+    {
+
+        StopAllCoroutines();
+        Animator.SetBool("WalkAttack", false);
+        StartCoroutine(LoadAttack());
+    }
+
+
+    IEnumerator LoadAttack()
+    {
+        Animator.SetBool("WalkAttack", false);
+
+        yield return new WaitForSeconds(0.5f);
+
+        Animator.SetTrigger("Load");
+
+        yield return new WaitForSeconds(3f);
+        Animator.SetTrigger("Assault");
+        m_Agent.isStopped = true;
+        Spinning = true;
+        float t = 0;
+
+        while (t < 1)
+        {
+            m_Agent.Move(transform.forward * 2 * Time.deltaTime);
+            t += Time.deltaTime;
+            yield return null;
+        }
+
+
+        Animator.SetTrigger("Stop");
+        yield return new WaitForSeconds(0.5f);
+        StartWalck();
+    }
+
+
+
+
+
+
+    public void GetStunned()
+    {
+        Stunned=true;
+        StopAllCoroutines();
+        Animator.SetTrigger("Stunned");
+        StartCoroutine(StunnedTime());
+    }
+
+    IEnumerator StunnedTime()
+    {
+        yield return new WaitForSeconds(3f);
+        Animator.SetTrigger("Stop");
+        IsPatrol=true;
+        StartWalck();
+    }
+
+
+
+
+
+
+
+
+
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Wall") && Spinning)
+        {
+            GetStunned();
+        }
+    }
+
+
 
 
     [System.Serializable]
