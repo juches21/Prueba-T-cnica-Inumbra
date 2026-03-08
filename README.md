@@ -26,4 +26,4 @@ Uso del new input system                                                        
 (Assets/Root/Code)
 DetectionSistem: se encarga de ocultar o mostrar las áreas de visión del enemigo y de detectar al jugador                                          <br><br>
 EnemyMotion: gestiona todo el apartado de estados tanto su rotación entre ellos como comportamiento de estos mismos                                <br><br>
-CharacterControl: controles de tanque para el jugador con new input system reutilizados de anteriores proyectos con el añadido de la funcion de ataque y de el Feedback visual         <br><br>
+CharacterControl: controles de tanque para el jugador con new input system reutilizados de anteriores proyectos con el añadido de la funcion de ataque y de el Feedback visual          <br><br>
