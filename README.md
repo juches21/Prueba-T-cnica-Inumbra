@@ -9,11 +9,19 @@
 <li>        Espacio/click izquierdo: atacar            </li>
 </ul>
 <h2>Caracteristicas</h2>
-Movimiento del enemigo mediante NavMesh.         <br>
-Control de estados mediante bools, funciones y corrutinas            <br>
-Sistema de creación de rutinas en la que se puede modificar si el enemigo seguir directamente al otro punto o si se detiene el tiempo que se le estipule haciendo un idle.          <br>
-Sistema de animaciones mediante Animator.         <br>
-Sistema de partículas al cargar el ataque y al ser aturdido.            <br>
-Feedback visual mediante UI al recibir golpe.              <br>
+Movimiento del enemigo mediante NavMesh.                                                                                                                                                       <br>
+Control de estados mediante bools, funciones y corrutinas                                                                                                                                    <br>
+Sistema de creación de rutinas en la que se puede modificar si el enemigo seguir directamente al otro punto o si se detiene el tiempo que se le estipule haciendo un idle.                                      <br>
+Sistema de animaciones mediante Animator.                                                                                                         <br>
+Sistema de partículas al cargar el ataque y al ser aturdido.                                                                                      <br>
+Feedback visual mediante UI al recibir golpe.                                                                                                     <br>
+Cono de visión del enemigo creado en Blender e integrado                                                                                          <br>
+Fbx de personajes y animaciones integradas desde Mixamo                                                                                           <br>
+Distancia de la patada modificable por interfaz                                                                                                   <br>
+Tiempo de aturdimiento modificable por interfaz                                                                                                   <br>
 
 <ul>
+
+<h2>Descripcion</h2>
+DetectionSistem: se encarga de ocultar o mostrar las áreas de visión del enemigo y de detectar al jugador                                          <br>
+EnemyMotion: gestiona todo el apartado de estados tanto su rotación entre ellos como comportamiento de estos mismos
