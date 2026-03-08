@@ -6,20 +6,20 @@ using static EnemyMotion;
 
 public class EnemyMotion : MonoBehaviour
 {
-    public List<Waypoints> WaypointsList = new List<Waypoints>();
+    [SerializeField] private List<Waypoints> WaypointsList = new List<Waypoints>();
 
+    public float AttackDistance;
 
     private NavMeshAgent m_Agent;
 
-    public bool IsPatrol;
+    bool IsPatrol;
 
-    public int currentWaypoint;
+    int currentWaypoint;
 
     private Animator Animator;
 
 
-    Rigidbody rb;
-
+    public Renderer Material1;
 
     bool Chequer;
     bool Spinning;
@@ -27,17 +27,21 @@ public class EnemyMotion : MonoBehaviour
 
 
     GameObject Player;
+
+    [SerializeField] private ParticleSystem ParticlePreload;
+    [SerializeField] private ParticleSystem ParticleStunned;
+
+
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+       
         Player = GameObject.FindGameObjectWithTag("Player");
         Animator = GetComponent<Animator>();
         m_Agent = GetComponent<NavMeshAgent>();
-        //NextWaypoint();
-        //AtackMode();
-        //GetStunned();
-        StartWalck();
+        StartWalk();
     }
 
     // Update is called once per frame
@@ -47,37 +51,44 @@ public class EnemyMotion : MonoBehaviour
         if (IsPatrol)
         {
 
-            // Cuando llega al destino
+         
             if (!m_Agent.pathPending && m_Agent.remainingDistance <= m_Agent.stoppingDistance && Chequer)
             {
                 Chequer = false;
 
-                //Animator.SetTrigger("Stop");
+               
                 StartCoroutine(PatrolStop());
 
             }
         }
-        else
-        {
-           
-        }
+      
     }
 
 
-    public void StartWalck()
-    {
-        print("restart");
-        m_Agent.isStopped = false;
+    #region Patrol
 
+
+    public void StartWalk()
+    {
+        print("comienza patrulla");
+        ParticlePreload.Stop();
+
+        Spinning = false;
+        m_Agent.isStopped = false;
+        gameObject.GetComponent<DetectionSistem>().Reset(); 
         IsPatrol = true;
         Chequer = true;
         Animator.SetBool("Attack", false);
+        Animator.SetBool("WalkAttack", false);
 
         NextWaypoint();
+        Animator.SetTrigger("Walk");
     }
+
+
     void NextWaypoint()
     {
-        
+        print("camina el siguiente punto");
         currentWaypoint++;
 
         // Si llega al final vuelve al primero
@@ -95,8 +106,11 @@ public class EnemyMotion : MonoBehaviour
 
     IEnumerator PatrolStop()
     {
+        print("llega al punto");
         if (WaypointsList[currentWaypoint].Wait)
         {
+            print("Espera " + WaypointsList[currentWaypoint].tiempo + " segundos en el punto");
+
             Animator.SetTrigger("Stop");
 
             float Time = WaypointsList[currentWaypoint].tiempo;
@@ -109,20 +123,18 @@ public class EnemyMotion : MonoBehaviour
     }
 
 
+    #endregion
+
+
+
+    #region Persecution
 
 
 
 
-
-
-
-
-
-
-
-    public void AtackMode()
+    public void AttackMode()
     {
-   
+        print("Jugador localizado");
         Animator.SetBool("Attack", true);
         StopAllCoroutines();
         IsPatrol = false;
@@ -139,7 +151,6 @@ public class EnemyMotion : MonoBehaviour
         {
             if (Vector3.Distance(transform.position, Player.transform.position) >= 2f)
             {
-                // Mover hacia el jugador
                 m_Agent.isStopped = false;
                 m_Agent.SetDestination(Player.transform.position);
 
@@ -149,7 +160,6 @@ public class EnemyMotion : MonoBehaviour
             else
             {
 
-                // Detenerse antes de llegar
                 m_Agent.isStopped = true;
 
                 StartAttack();
@@ -168,16 +178,18 @@ public class EnemyMotion : MonoBehaviour
 
                 
             }
-            yield return null; // esperar al siguiente frame
+            yield return null; 
         }
 
     }
 
+    #endregion
 
+    #region Attack
 
     void StartAttack()
     {
-
+        print("iniciando ataque");
         StopAllCoroutines();
         Animator.SetBool("WalkAttack", false);
         StartCoroutine(LoadAttack());
@@ -186,6 +198,8 @@ public class EnemyMotion : MonoBehaviour
 
     IEnumerator LoadAttack()
     {
+        ParticlePreload.Play();
+        transform.LookAt(Player.transform);
         Animator.SetBool("WalkAttack", false);
 
         yield return new WaitForSeconds(0.5f);
@@ -198,27 +212,32 @@ public class EnemyMotion : MonoBehaviour
         Spinning = true;
         float t = 0;
 
-        while (t < 1)
+        while (t < 0.5f)
         {
-            m_Agent.Move(transform.forward * 2 * Time.deltaTime);
+            m_Agent.Move(transform.forward * AttackDistance * Time.deltaTime);
             t += Time.deltaTime;
             yield return null;
         }
+        print("ataque lanzado");
 
-
-        Animator.SetTrigger("Stop");
         yield return new WaitForSeconds(0.5f);
-        StartWalck();
+        StartWalk();
     }
 
 
 
+    #endregion
 
+    #region Stunned
 
 
     public void GetStunned()
     {
-        Stunned=true;
+        print("Aturdido");
+        ParticleStunned.Play();
+        ParticlePreload.Stop();
+
+        Stunned = true;
         StopAllCoroutines();
         Animator.SetTrigger("Stunned");
         StartCoroutine(StunnedTime());
@@ -226,20 +245,59 @@ public class EnemyMotion : MonoBehaviour
 
     IEnumerator StunnedTime()
     {
-        yield return new WaitForSeconds(3f);
-        Animator.SetTrigger("Stop");
-        IsPatrol=true;
-        StartWalck();
+        yield return new WaitForSeconds(2f);
+    
+        ParticleStunned.Stop();
+
+        IsPatrol = true;
+        StartWalk();
     }
 
 
+    #endregion
+
+    #region Dead
 
 
+    void Dead()
+    {
+        print("derrotado");
+        StopAllCoroutines();
+        ParticleStunned.Stop();
+        StartCoroutine(Disappear());
+
+    }
+
+ 
+    IEnumerator Disappear()
+    {
+        float x = 1f;
+
+        Color c = Material1.material.color;
+        while (x > 0)
+        {
+            x -= Time.deltaTime;
+
+            c.a = x;
+        
+
+            Material1.material.color = c;
+
+            yield return null;
+        }
+
+        // asegurarse de que quede totalmente invisible
+        c.a = 0;
+       
+
+        Material1.material.color = c;
+        gameObject.SetActive(false);
+    }
+
+    #endregion
 
 
-
-
-
+    #region Trigger/Colliders
 
 
     private void OnTriggerEnter(Collider other)
@@ -248,10 +306,27 @@ public class EnemyMotion : MonoBehaviour
         {
             GetStunned();
         }
+        if(other.CompareTag("AttackArea") && Stunned)
+        {
+            Dead();
+            print("dead");
+        }
+    
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.CompareTag("Player") && Spinning)
+        {
+            print("hit");
+            collision.gameObject.GetComponent<CharacterControl>().Damage();
+        }
+    }
+
+    #endregion
 
 
+    #region WaypointClass
 
     [System.Serializable]
     public class Waypoints
@@ -260,5 +335,6 @@ public class EnemyMotion : MonoBehaviour
         public bool Wait;
         public float tiempo;
     }
+    #endregion
 
 }
