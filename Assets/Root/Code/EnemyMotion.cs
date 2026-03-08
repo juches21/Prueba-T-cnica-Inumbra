@@ -1,3 +1,4 @@
+//-------------------------------------------------Chovi-------------------------------------------------//
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,7 @@ public class EnemyMotion : MonoBehaviour
     [SerializeField] private List<Waypoints> WaypointsList = new List<Waypoints>();
 
     public float AttackDistance;
+    public float StunnedTime_n;
 
     private NavMeshAgent m_Agent;
 
@@ -245,7 +247,7 @@ public class EnemyMotion : MonoBehaviour
 
     IEnumerator StunnedTime()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(StunnedTime_n);
     
         ParticleStunned.Stop();
 
@@ -338,3 +340,5 @@ public class EnemyMotion : MonoBehaviour
     #endregion
 
 }
+//-------------------------------------------------Chovi-------------------------------------------------//
+
