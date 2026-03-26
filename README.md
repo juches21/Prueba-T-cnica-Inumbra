@@ -26,9 +26,10 @@ Uso del asset 3rd Person Controller                                             
 
 
 <h2>Descripcion</h2>
-(Assets/Root/Code)
+(Assets/Root/Code)         <br><br><br>
 DetectionSistem: se encarga de ocultar o mostrar las áreas de visión del enemigo y de detectar al jugador                                          <br><br>
-(Assets/Root/Code/Maquina estados)
+CharacterControl:  funcion de ataque y de el Feedback visual para el juagdor          <br><br><br>
+(Assets/Root/Code/Maquina estados)            <br><br><br>
 EnemyStateMachine: gestiona todo el apartado de estados y seria la pieza angular puesto que se encarga de insertar los demas sripts en el game object                                <br><br>
 EnemyAnimatorController: se encarga de ejecutar las animaciones a peticion del resto de codigos (aun en proceso)                                                                          <br><br>
 EnemyTriggerAndCollision: se encarga de procesar las colisiones y los triggers del enemigo                                                                          <br><br>
@@ -41,7 +42,7 @@ EnemyWalkState: se encarga de ejecutar toda la logica del sistema de patrulla po
 
 
 
-CharacterControl:  funcion de ataque y de el Feedback visual para el juagdor          <br><br>
+
 
 <h2>Bugs Conocidos</h2>
 
