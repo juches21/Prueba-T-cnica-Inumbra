@@ -2,16 +2,16 @@
 
 using Unity.VisualScripting;
 using UnityEngine;
-using static EnemyMotion;
 
 public class DetectionSistem : MonoBehaviour
 {
     [SerializeField] private GameObject Vision1;
     [SerializeField] private GameObject Vision2;
+    private EnemyStateMachine Machine;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        Machine= gameObject.GetComponent<EnemyStateMachine>();
     }
 
     // Update is called once per frame
@@ -31,7 +31,8 @@ public class DetectionSistem : MonoBehaviour
         {
             Vision1.SetActive(false);
             Vision2.SetActive(false);
-            gameObject.GetComponent<EnemyMotion>().AttackMode();
+
+            Machine.Cambio(EnemyStateMachine.States.Chasing);
         }
     }
 }
