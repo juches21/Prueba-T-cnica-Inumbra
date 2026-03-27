@@ -31,7 +31,7 @@ DetectionSistem: se encarga de ocultar o mostrar las áreas de visión del enemi
 CharacterControl:  funcion de ataque y de el Feedback visual para el juagdor          <br><br><br>
 (Assets/Root/Code/Maquina estados)            <br><br><br>
 EnemyStateMachine: gestiona todo el apartado de estados y seria la pieza angular puesto que se encarga de insertar los demas sripts en el game object                                <br><br>
-EnemyAnimatorController: se encarga de ejecutar las animaciones a peticion del resto de codigos (aun en proceso)                                                                          <br><br>
+EnemyAnimatorController: se encarga de ejecutar las animaciones a peticion del resto de codigos                                                                        <br><br>
 EnemyTriggerAndCollision: se encarga de procesar las colisiones y los triggers del enemigo                                                                          <br><br>
 EnemyAttackState: se encarga de ejecutar toda la logica del comportamiento de atacar                                                                          <br><br>
 EnemyChaseState: se encarga de ejecutar toda la logica del comportamiento de la perseccuicion al jugador                                                                          <br><br>
@@ -46,4 +46,4 @@ EnemyWalkState: se encarga de ejecutar toda la logica del sistema de patrulla po
 
 <h2>Bugs Conocidos</h2>
 
-Algunas animaciones no se ejecutan cuando es debido; se está trabajando en implementar una solución.
+Ninguno hasta la fecha
