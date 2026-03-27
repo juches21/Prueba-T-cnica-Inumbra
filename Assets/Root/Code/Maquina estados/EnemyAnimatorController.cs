@@ -29,15 +29,5 @@ public class EnemyAnimatorController : MonoBehaviour
 
     }
 
-    public void AttackStart()
-    {
-        ESM.Animator.SetBool("Attack", true);
 
-    }
-
-    public void AttackStop()
-    {
-        ESM.Animator.SetBool("Attack", false);
-
-    }
 }

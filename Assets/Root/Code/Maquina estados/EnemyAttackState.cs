@@ -31,7 +31,7 @@ public class EnemyAttackState : MonoBehaviour
 
 
     [SerializeField] private ParticleSystem ParticlePreload;
-   
+
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -52,9 +52,6 @@ public class EnemyAttackState : MonoBehaviour
     {
         print("iniciando ataque");
 
-        //ESM.Animator.SetBool("WalkAttack", false);
-       
-
         ESM.miCorrutina = StartCoroutine(LoadAttack());
     }
 
@@ -67,18 +64,18 @@ public class EnemyAttackState : MonoBehaviour
 
         yield return new WaitForSeconds(0.5f);
 
-       
 
-            ESM._animatorController.AnimationTrigger("Load");
-   
+
+        ESM._animatorController.AnimationTrigger("Load");
+
 
         yield return new WaitForSeconds(3f);
 
         ParticlePreload.Stop();
 
-            ESM._animatorController.AnimationTrigger("Assault");
+        ESM._animatorController.AnimationTrigger("Assault");
 
-       
+
 
 
         ESM.m_Agent.isStopped = true;
@@ -91,8 +88,8 @@ public class EnemyAttackState : MonoBehaviour
             t += Time.deltaTime;
             yield return null;
         }
-        
-        
+
+
         yield return new WaitForSeconds(0.5f);
         Stop();
 

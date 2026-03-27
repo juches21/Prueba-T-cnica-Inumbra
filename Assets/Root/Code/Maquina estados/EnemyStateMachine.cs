@@ -124,7 +124,7 @@ public class EnemyStateMachine : MonoBehaviour
 
             StopCoroutine(miCorrutina);
         }
-        _animatorController.StopAnimation();
+       
         _walkState.Stop();
         _chaseState.Stop();
     }

@@ -103,7 +103,7 @@ public class EnemyWalkState : MonoBehaviour
 
             print("Espera " + WaypointsList[currentWaypoint].tiempo + " segundos en el punto");
 
-            //ESM.Animator.SetTrigger("Stop");
+            ESM._animatorController.StopAnimation();
 
             float Time = WaypointsList[currentWaypoint].tiempo;
             yield return new WaitForSeconds(Time);
