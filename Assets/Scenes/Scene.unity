@@ -8,8 +8,8 @@ OcclusionCullingSettings:
     smallestOccluder: 5
     smallestHole: 0.25
     backfaceThreshold: 100
-  m_SceneGUID: 00000000000000000000000000000000
-  m_OcclusionCullingData: {fileID: 0}
+  m_SceneGUID: e11c042d395cb2a4aa19abd0e2a83009
+  m_OcclusionCullingData: {fileID: 36300000, guid: 61a1d3302a4ef5b4aa8e88dc7344a0b7, type: 2}
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
@@ -244,7 +244,7 @@ GameObject:
   m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!65 &266265511
 BoxCollider:
@@ -770,7 +770,7 @@ GameObject:
   m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!65 &544328528
 BoxCollider:
@@ -1043,7 +1043,7 @@ GameObject:
   m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!65 &580071061
 BoxCollider:
@@ -6126,7 +6126,7 @@ GameObject:
   m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!65 &927406413
 BoxCollider:
@@ -6521,7 +6521,7 @@ GameObject:
   m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!65 &1057389540
 BoxCollider:
@@ -6716,18 +6716,6 @@ PrefabInstance:
       addedObject: {fileID: 1967448195}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9e34bb17e97e9f241a72b37eb71156dd, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1967448190}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9e34bb17e97e9f241a72b37eb71156dd, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1967448189}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9e34bb17e97e9f241a72b37eb71156dd, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1967448188}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9e34bb17e97e9f241a72b37eb71156dd, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1967448187}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9e34bb17e97e9f241a72b37eb71156dd, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1967448194}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9e34bb17e97e9f241a72b37eb71156dd, type: 3}
       insertIndex: -1
@@ -6744,6 +6732,18 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9e34bb17e97e9f241a72b37eb71156dd, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1967448200}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9e34bb17e97e9f241a72b37eb71156dd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1967448190}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9e34bb17e97e9f241a72b37eb71156dd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1967448187}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9e34bb17e97e9f241a72b37eb71156dd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1967448188}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9e34bb17e97e9f241a72b37eb71156dd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1967448189}
   m_SourcePrefab: {fileID: 100100000, guid: 9e34bb17e97e9f241a72b37eb71156dd, type: 3}
 --- !u!1 &1293986458
 GameObject:
@@ -6763,7 +6763,7 @@ GameObject:
   m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!65 &1293986459
 BoxCollider:
@@ -6973,7 +6973,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!65 &1362044531
 BoxCollider:
@@ -7114,7 +7114,7 @@ GameObject:
   m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!65 &1431716652
 BoxCollider:
@@ -12200,7 +12200,7 @@ GameObject:
   m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!65 &1744495803
 BoxCollider:
@@ -13063,7 +13063,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2141394912
 Transform:
@@ -13073,7 +13073,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2141394911}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 4.6596, y: 0.5, z: -4.25994}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
