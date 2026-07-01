@@ -53,11 +53,11 @@ The objective was to demonstrate proficiency in gameplay programming, AI behavio
 
 <hr>
 
-<h2>🎮 Gameplay / Screenshots</h2>
+<!-- <h2>🎮 Gameplay / Screenshots</h2>
 
 <p><em>Add screenshots or GIFs here showcasing patrol behavior, player combat, enemy detection, and stun mechanics.</em></p>
 
-<hr>
+<hr> -->
 
 <h2>🛠️ Technologies Used</h2>
 
